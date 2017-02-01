@@ -13,6 +13,9 @@ RUN apt-get install -y gcc
 RUN apt-get install -y ssh
 RUN apt-get install -y eclipse
 RUN apt-get install -y netbeans
+RUN apt-get install -y git
+RUN apt-get install -y meld
+RUN apt-get install -y qgit
 
 RUN export UserName="deepgrant" uid=501 gid=20 && \
     mkdir -p /home/${UserName} && \
