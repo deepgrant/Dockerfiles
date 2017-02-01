@@ -2,8 +2,6 @@ FROM ubuntu
 
 RUN apt-get update && apt-get install -y firefox
 
-# Replace 1000 with your user / group id
-# uid=501(gmills) gid=20(staff)
 RUN export uid=501 gid=20 && \
     mkdir -p /home/developer && \
     echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
