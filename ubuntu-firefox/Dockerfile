@@ -10,6 +10,9 @@ RUN apt-get install -y python
 RUN apt-get install -y scala
 RUN apt-get install -y g++
 RUN apt-get install -y gcc
+RUN apt-get install -y ssh
+RUN apt-get install -y eclipse
+RUN apt-get install -y netbeans
 
 RUN export UserName="deepgrant" uid=501 gid=20 && \
     mkdir -p /home/${UserName} && \
