@@ -1,9 +1,12 @@
 FROM ubuntu
 
+LABEL Description="Ubuntu build/dev environment."
+
 RUN apt-get update
 RUN apt-get install -y libglu1-mesa
 RUN apt-get install -y sudo
-RUN apt-get install -y firefox
+RUN apt-get install -y net-tools
+RUN apt-get install -y iputils-ping
 RUN apt-get install -y vim
 RUN apt-get install -y emacs
 RUN apt-get install -y python
@@ -18,7 +21,7 @@ RUN apt-get install -y meld
 RUN apt-get install -y qgit
 RUN apt-get install -y make
 RUN apt-get install -y cmake
-RUN apt-get install -y gnome-terminal
+RUN apt-get install -y xterm
 RUN apt-get install -y autoconf
 
 RUN export UserName="deepgrant" uid=501 gid=20 && \
@@ -30,5 +33,8 @@ RUN export UserName="deepgrant" uid=501 gid=20 && \
     chown ${uid}:${gid} -R /home/${UserName}
 
 USER deepgrant
-ENV HOME /home/deepgrant
-CMD /usr/bin/firefox
+ENV HOME=/home/deepgrant
+ENV PATH=${PATH}:${HOME}/bin
+WORKDIR ${HOME}
+EXPOSE 5900
+EXPOSE 22
