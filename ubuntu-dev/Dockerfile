@@ -16,6 +16,10 @@ RUN apt-get install -y netbeans
 RUN apt-get install -y git
 RUN apt-get install -y meld
 RUN apt-get install -y qgit
+RUN apt-get install -y make
+RUN apt-get install -y cmake
+RUN apt-get install -y gnome-terminal
+RUN apt-get install -y autoconf
 
 RUN export UserName="deepgrant" uid=501 gid=20 && \
     mkdir -p /home/${UserName} && \
