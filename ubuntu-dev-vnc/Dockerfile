@@ -23,6 +23,9 @@ RUN apt-get install -y python
 RUN apt-get install -y scala
 RUN apt-get install -y g++
 RUN apt-get install -y gcc
+RUN apt-get install -y zlib1g-dev
+RUN apt-get install -y libboost-all-dev
+RUN apt-get install -y libssl-dev
 RUN apt-get install -y ssh
 RUN apt-get install -y eclipse
 RUN apt-get install -y netbeans
@@ -38,5 +41,6 @@ ADD supervisord.conf /etc/supervisor/conf.d/
 ENV HOME=/home/deepgrant
 ENV PATH=${PATH}:${HOME}/bin
 WORKDIR ${HOME}
+ADD .bash_profile ${HOME}
 
 ENTRYPOINT ["/startup.sh"]
