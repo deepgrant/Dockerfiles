@@ -36,11 +36,15 @@ RUN apt-get install -y make
 RUN apt-get install -y cmake
 RUN apt-get install -y xterm
 RUN apt-get install -y autoconf
+RUN apt-get install -y automake
+RUN apt-get install -y unzip
+RUN apt-get install -y libtool
 
+ADD timezone /etc/
+ENV TZ=America/New_York
 ADD supervisord.conf /etc/supervisor/conf.d/
 ENV HOME=/home/deepgrant
 ENV PATH=${PATH}:${HOME}/bin
 WORKDIR ${HOME}
 ADD .bash_profile ${HOME}
-
 ENTRYPOINT ["/startup.sh"]
