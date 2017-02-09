@@ -23,6 +23,7 @@ apt-get install -y python && \
 apt-get install -y scala && \
 apt-get install -y g++ && \
 apt-get install -y gcc && \
+apt-get install -y gdb && \
 apt-get install -y zlib1g-dev && \
 apt-get install -y libboost-all-dev && \
 apt-get install -y libssl-dev && \
