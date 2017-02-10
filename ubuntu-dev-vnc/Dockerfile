@@ -20,7 +20,7 @@ apt-get install -y iputils-ping && \
 apt-get install -y vim && \
 apt-get install -y emacs && \
 apt-get install -y python && \
-apt-get install -y python-dev && \
+apt-get install -y pylint && \
 apt-get install -y pyflakes && \
 apt-get install -y scala && \
 apt-get install -y g++ && \
