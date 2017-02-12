@@ -23,6 +23,7 @@ apt-get install -y python && \
 apt-get install -y pylint && \
 apt-get install -y pyflakes && \
 apt-get install -y scala && \
+apt-get install -y spring && \
 apt-get install -y g++ && \
 apt-get install -y gcc && \
 apt-get install -y gdb && \
