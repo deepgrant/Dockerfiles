@@ -1,49 +1,48 @@
-FROM ubuntu
+FROM ubuntu:17.04
 
 LABEL Description="Ubuntu build/dev environment."
 
 RUN apt-get update && apt-get install -y apt-transport-https
 
-RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+# Set the timezone.
+ENV TZ=America/New_York
+RUN apt-get install -y tzdata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get update && \
-apt-get install -y libglu1-mesa && \
-apt-get install -y sudo && \
-apt-get install -y net-tools && \
-apt-get install -y iputils-ping && \
-apt-get install -y vim && \
-apt-get install -y emacs && \
-apt-get install -y python && \
-apt-get install -y pylint && \
-apt-get install -y pyflakes && \
-apt-get install -y scala && \
-apt-get install -y sbt && \
-apt-get install -y spring && \
-apt-get install -y maven && \
-apt-get install -y ivy && \
-apt-get install -y g++ && \
-apt-get install -y gcc && \
-apt-get install -y gdb && \
-apt-get install -y zlib1g-dev && \
-apt-get install -y libboost-all-dev && \
-apt-get install -y libssl-dev && \
-apt-get install -y ssh && \
-apt-get install -y eclipse && \
-apt-get install -y netbeans && \
-apt-get install -y git && \
-apt-get install -y meld && \
-apt-get install -y qgit && \
-apt-get install -y make && \
-apt-get install -y cmake && \
-apt-get install -y xterm && \
-apt-get install -y autoconf && \
-apt-get install -y automake && \
-apt-get install -y unzip && \
-apt-get install -y libtool && \
-apt-get install -y protobuf-compiler && \
-apt-get install -y python-protobuf && \
-apt-get install -y wget
+RUN apt-get update
+RUN apt-get install -y libglu1-mesa
+RUN apt-get install -y sudo
+RUN apt-get install -y net-tools
+RUN apt-get install -y iputils-ping
+RUN apt-get install -y vim
+RUN apt-get install -y python
+RUN apt-get install -y python-setuptools python-dev build-essential
+RUN apt-get install -y scala
+RUN apt-get install -y gradle
+RUN apt-get install -y maven
+RUN apt-get install -y ivy
+RUN apt-get install -y g++ gcc gdb
+RUN apt-get install -y zlib1g-dev
+RUN apt-get install -y libboost-all-dev
+RUN apt-get install -y libssl-dev
+RUN apt-get install -y ssh
+RUN apt-get install -y git
+RUN apt-get install -y make cmake autoconf automake
+RUN apt-get install -y unzip
+RUN apt-get install -y libtool
+RUN apt-get install -y wget
+RUN apt-get install -y curl
+RUN apt-get install -y lsof
+
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python get-pip.py
+RUN pip install virtualenv
+
+COPY requirements.txt /tmp
+RUN pip install --requirement /tmp/requirements.txt
+
+RUN dpkg-reconfigure -f noninteractive tzdata
+RUN date
 
 RUN export UserName="deepgrant" uid=501 gid=20 && \
     mkdir -p /home/${UserName} && \
@@ -57,10 +56,3 @@ USER deepgrant
 ENV HOME=/home/deepgrant
 ENV PATH=${PATH}:${HOME}/bin
 WORKDIR ${HOME}
-EXPOSE 5900
-EXPOSE 22
-
-RUN wget https://bootstrap.pypa.io/ez_setup.py && \
-    python ez_setup.py && \
-    wget https://bootstrap.pypa.io/get-pip.py && \
-    python get-pip.py
