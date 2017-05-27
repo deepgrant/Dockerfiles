@@ -44,6 +44,7 @@ RUN apt-get install -y libconfig-yaml-perl
 
 RUN cpan App::cpanminus
 RUN cpan install XML::LibXML
+RUN cpan XML::Simple
 
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
@@ -67,3 +68,4 @@ USER deepgrant
 ENV HOME=/home/deepgrant
 ENV PATH=${PATH}:${HOME}/bin
 WORKDIR ${HOME}
+
