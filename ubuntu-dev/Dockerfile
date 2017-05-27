@@ -34,6 +34,17 @@ RUN apt-get install -y wget
 RUN apt-get install -y curl
 RUN apt-get install -y lsof
 
+RUN apt-get install -y man
+RUN apt-get install -y ffmpeg
+RUN apt-get install -y libjson-xs-perl
+RUN apt-get install -y libwww-perl
+RUN apt-get install -y libxml2 libxml2-dev xml2
+RUN apt-get install -y libparse-cpan-packages-perl
+RUN apt-get install -y libconfig-yaml-perl
+
+RUN cpan App::cpanminus
+RUN cpan install XML::LibXML
+
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
 RUN pip install virtualenv
