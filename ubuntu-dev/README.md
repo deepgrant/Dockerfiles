@@ -1,10 +1,11 @@
 # ubuntu-dev environment setup
 
 To build the image:
-`docker build -t ubuntu-dev .`
+```
+docker build --build-arg UserName=${USER} -t ubuntu-dev .
+```
 
 To run and mount development environment:
-`docker run -itd --name=ubuntu-dev -v ~/:/home/deepgrant -h ubuntu-dev ubuntu-dev /bin/bash`
-
-To connect the the bash shell in the container:
-`docker container attach ubuntu-dev`
+```
+docker run -it -entrypoint=/bin/bash --dns=185.37.37.37 --mount type=bind,source=${HOME},target=/home/${USER},consistency=cached -h ubuntu-dev ubuntu-dev
+```
